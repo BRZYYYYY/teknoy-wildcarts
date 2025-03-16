@@ -55,7 +55,7 @@ if (logoutButton) {
     logoutButton.addEventListener("click", () => {
         localStorage.removeItem("userId");
         updateUserGreeting();
-        window.location.href = "/index.html"; // Use root-relative path
+        window.location.href = "/home.html" // Use root-relative path
     });
 }
 
