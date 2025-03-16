@@ -3,45 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Details - Wildcarts</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Order Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #orderSummary {
+            margin-top: 20px;
+        }
+        .order-item {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div class="order-details">
-        <h1>Your Order Details</h1>
-        <div class="order-card" id="orderItems">
-            <!-- Items will be dynamically added here -->
-        </div>
-        <p><strong>Total:</strong> ₱<span id="orderTotal">0</span></p>
-    </div>
+    <h1>Order Details</h1>
+    <div id="orderSummary"></div>
 
     <script>
-        // Parse URL query parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const itemsParam = urlParams.get("items");
-        let items = [];
-        let total = 0;
+        // Function to get query parameter by name
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
 
+        // Get the items from the URL
+        const itemsParam = getQueryParam("items");
+        let items = [];
         if (itemsParam) {
-            items = JSON.parse(decodeURIComponent(itemsParam));
-            total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            try {
+                items = JSON.parse(decodeURIComponent(itemsParam));
+            } catch (e) {
+                console.error("Error parsing items:", e);
+            }
         }
 
         // Display the order details
-        const orderItemsContainer = document.getElementById("orderItems");
-        items.forEach(item => {
-            const itemDiv = document.createElement("div");
-            itemDiv.classList.add("order-item");
-            itemDiv.innerHTML = `
-                <img src="${decodeURIComponent(item.image)}" alt="${item.name}">
-                <p><strong>Item:</strong> ${item.name}</p>
-                <p><strong>Quantity:</strong> ${item.quantity}</p>
-                <p><strong>Price:</strong> ₱${item.price}</p>
-            `;
-            orderItemsContainer.appendChild(itemDiv);
-        });
-
-        document.getElementById("orderTotal").textContent = total.toFixed(2);
+        const orderSummary = document.getElementById("orderSummary");
+        if (items.length > 0) {
+            let total = 0;
+            items.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                const itemDiv = document.createElement("div");
+                itemDiv.classList.add("order-item");
+                itemDiv.innerHTML = `
+                    <p><strong>Item:</strong> ${item.name}</p>
+                    <p><strong>Size:</strong> ${item.size}</p>
+                    <p><strong>Quantity:</strong> ${item.quantity}</p>
+                    <p><strong>Price:</strong> ₱${item.price}</p>
+                    <hr>
+                `;
+                orderSummary.appendChild(itemDiv);
+            });
+            const totalDiv = document.createElement("div");
+            totalDiv.innerHTML = `<p><strong>Total:</strong> ₱${total.toFixed(2)}</p>`;
+            orderSummary.appendChild(totalDiv);
+        } else {
+            orderSummary.innerHTML = "<p>No order details found.</p>";
+        }
     </script>
 </body>
 </html>
