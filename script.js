@@ -75,7 +75,7 @@ if (loginForm) {
         localStorage.setItem("userId", idNumber);
 
         // Redirect to the main page
-        window.location.href = "/home.html"; // Use root-relative path
+        window.location.href = "https://github.com/BRZYYYYY/teknoy-wildcarts/home.html"; // Use root-relative path
     });
 }
 
