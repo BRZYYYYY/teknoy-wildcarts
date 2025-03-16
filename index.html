@@ -13,16 +13,19 @@
             <img src="images/logo.png" alt="Teknoy Wildcarts Logo" class="login-logo">
         </div>
         <h1 class="welcome-text">Welcome to Teknoy Wildcarts</h1>
+        
         <div class="login-form">
             <h2>Login</h2>
             <form id="loginForm">
                 <div class="form-group">
                     <label for="idNumber">Enter your ID Number</label>
                     <input type="text" id="idNumber" name="idNumber" placeholder="25-1234-56" required>
+                    <span id="errorMsg" class="error">Invalid ID number</span>
                 </div>
                 <button type="submit" class="login-btn">Login</button>
             </form>
         </div>
+        
     </div>
 
     <script src="script.js"></script>
