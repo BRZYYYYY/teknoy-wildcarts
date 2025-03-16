@@ -303,9 +303,9 @@ if (buyNowCartButton) {
         const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
         orderInfo += `Total: ₱${total.toFixed(2)}`;
 
-        // Create URL with query parameters for QR code (use relative path)
+        // Create URL with query parameters for QR code (use absolute path)
         const itemsParam = encodeURIComponent(JSON.stringify(cart));
-        const orderUrl = `./order-details.html?items=${itemsParam}`;
+        const orderUrl = `https://brzyyyyy.github.io/teknoy-wildcarts/order-details.html?items=${itemsParam}`;
 
         // Clear the cart immediately after clicking "Buy Now"
         cart = [];
