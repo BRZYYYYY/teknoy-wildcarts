@@ -8,25 +8,22 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
 </head>
 <body>
+    
     <header>
-        <div class="user-section">
-            <span class="user-greeting" id="userGreeting"></span>
-            <button class="logout-btn" id="logoutButton" style="display: none;">Logout</button>
-        </div>
         <nav>
             <div class="logo-container">
                 <h1 class="logo">Teknoy Wildcarts</h1>
                 <div class="menu-icon" id="menuIcon"><i class="ri-menu-line"></i></div>
             </div>
             <div class="search-cart">
-                <div class="search">
-                    <input type="text" placeholder="Search here...">
-                    <i class="ri-search-line"></i>
+                <div class="user-section">
+                    <span class="user-greeting" id="userGreeting"></span>
+                    <a href="#" class="cart" id="cartButton">
+                        <i class="ri-shopping-cart-line"></i>
+                        <span class="cart-badge">0</span>
+                    </a>
+                    <button class="logout-btn" id="logoutButton" style="display: none;">Logout</button>
                 </div>
-                <a href="#" class="cart" id="cartButton">
-                    <i class="ri-shopping-cart-line"></i>
-                    <span class="cart-badge">0</span>
-                </a>
             </div>
         </nav>
     </header>
