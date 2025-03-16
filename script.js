@@ -305,7 +305,7 @@ if (buyNowCartButton) {
 
         // Create URL with query parameters for QR code (use relative path)
         const itemsParam = encodeURIComponent(JSON.stringify(cart));
-        const orderUrl = `/order-details.html?items=${itemsParam}`;
+        const orderUrl = `./order-details.html?items=${itemsParam}`;
 
         // Clear the cart immediately after clicking "Buy Now"
         cart = [];
