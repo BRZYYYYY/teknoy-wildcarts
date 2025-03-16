@@ -55,7 +55,7 @@ if (logoutButton) {
     logoutButton.addEventListener("click", () => {
         localStorage.removeItem("userId");
         updateUserGreeting();
-        window.location.href = "/teknoy-wildcarts/index.html" // Use root-relative path
+        window.location.href = "./index.html" // Use root-relative path
     });
 }
 
@@ -74,8 +74,8 @@ if (loginForm) {
         // Simulate a successful login
         localStorage.setItem("userId", idNumber);
 
-        // Redirect to the main page
-        window.location.href = "/teknoy-wildcarts/home.html"; // Use root-relative path
+        // Redirect to the main page using a relative path
+        window.location.href = "./home.html"; // Relative to the current directory
     });
 }
 
