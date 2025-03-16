@@ -13,6 +13,15 @@ body {
     min-height: 100vh;
 }
 
+.error {
+    color: red;
+    display: none;
+}
+
+.error.show {
+    display: block;
+}
+
 /* Remove unnecessary content class */
 .footer {
     width: 100%;
