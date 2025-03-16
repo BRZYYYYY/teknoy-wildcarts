@@ -59,15 +59,54 @@ if (logoutButton) {
     });
 }
 
-// Handle login form submission
+// Handle login form submission with ID validation
 if (loginForm) {
+    const idInput = document.getElementById("idNumber");
+
+    // Restrict input to numbers and hyphens only with auto-formatting
+    idInput.addEventListener('input', function(e) {
+        // Remove any non-numeric characters except hyphens
+        this.value = this.value.replace(/[^0-9-]/g, '');
+        
+        // Auto-add hyphens at correct positions
+        let value = this.value.replace(/-/g, ''); // Remove existing hyphens
+        if (value.length > 2) {
+            value = value.slice(0, 2) + '-' + value.slice(2);
+        }
+        if (value.length > 7) {
+            value = value.slice(0, 7) + '-' + value.slice(7);
+        }
+        this.value = value.slice(0, 11); // Limit to max length
+        
+        // Prevent more digits after reaching the limit for each section
+        let parts = this.value.split('-');
+        if (parts[0] && parts[0].length > 2) {
+            parts[0] = parts[0].slice(0, 2);
+        }
+        if (parts[1] && parts[1].length > 4) {
+            parts[1] = parts[1].slice(0, 4);
+        }
+        if (parts[2] && parts[2].length > 3) {
+            parts[2] = parts[2].slice(0, 3);
+        }
+        this.value = parts.join('-');
+    });
+
     loginForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        const idNumber = document.getElementById("idNumber").value.trim();
+        const idNumber = idInput.value.trim();
 
         // Basic validation: Check if ID Number is not empty
         if (idNumber === "") {
             alert("Please enter your ID Number.");
+            return;
+        }
+
+        // Validate ID format (12-3456-789)
+        const pattern = /^\d{2}-\d{4}-\d{3}$/;
+        if (!pattern.test(idNumber)) {
+            alert("Invalid ID number. Please use format: 12-3456-789");
+            idInput.focus();
             return;
         }
 
@@ -78,6 +117,7 @@ if (loginForm) {
         window.location.href = "./home.html"; // Relative to the current directory
     });
 }
+
 
 // Toggle about modal with animation
 if (menuIcon) {
